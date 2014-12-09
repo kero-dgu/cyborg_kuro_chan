@@ -3,7 +3,7 @@
 
 
 // Prototype declarations **************************************************
-void init_game_scene(void);     // ゲーム画面の初期化w
+void init_game_scene(void);     // ゲーム画面の初期化
 void update_game_scene(void);   // ゲーム画面の更新化
 void draw_game_scene(void);     // ゲーム画面の描画
 void fin_game_scene(void);      // ゲーム画面の終了

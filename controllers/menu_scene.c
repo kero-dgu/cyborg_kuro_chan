@@ -1,5 +1,6 @@
 #include "menu_scene.h"
 #include "../managers/game.h"
+#include "../managers/keyboard.h"
 #include <GL/freeglut.h>
 #include <string.h>
 
@@ -21,7 +22,9 @@ void init_menu_scene(void)
  */
 void update_menu_scene(void)
 {
-
+  if (check_key_state(GLUT_KEY_A) == KEY_DOWN) {
+    LOG("'a' が押されました");
+  }
 }
 
 /**

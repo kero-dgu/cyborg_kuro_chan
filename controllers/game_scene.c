@@ -3,7 +3,7 @@
 
 
 /**
- * ゲーム画面の初期化
+ * ゲームシーンの初期化
  */
 void init_game_scene(void)
 {
@@ -11,7 +11,7 @@ void init_game_scene(void)
 }
 
 /**
- * ゲーム画面の更新
+ * ゲームシーンの更新
  */
 void update_game_scene(void)
 {
@@ -19,7 +19,7 @@ void update_game_scene(void)
 }
 
 /**
- * ゲーム画面の描画
+ * ゲームシーンの描画
  */
 void draw_game_scene(void)
 {
@@ -27,10 +27,9 @@ void draw_game_scene(void)
 }
 
 /**
- * ゲーム画面の終了
+ * ゲームシーンの終了
  */
 void fin_game_scene(void)
 {
 
 }
-

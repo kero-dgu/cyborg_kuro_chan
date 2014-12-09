@@ -1,30 +1,32 @@
 draw_config_scene	controllers\config_scene.c	/^void draw_config_scene(void)$/;"	f
 fin_config_scene	controllers\config_scene.c	/^void fin_config_scene(void)$/;"	f
 init_config_scene	controllers\config_scene.c	/^void init_config_scene(void)$/;"	f
+update_config_scene	controllers\config_scene.c	/^void update_config_scene(void)$/;"	f
 __CONFIG_SCENE_H__	controllers\config_scene.h	2;"	d
 draw_game_scene	controllers\game_scene.c	/^void draw_game_scene(void)$/;"	f
 fin_game_scene	controllers\game_scene.c	/^void fin_game_scene(void)$/;"	f
 init_game_scene	controllers\game_scene.c	/^void init_game_scene(void)$/;"	f
+update_game_scene	controllers\game_scene.c	/^void update_game_scene(void)$/;"	f
 __GAME_SCENE_H__	controllers\game_scene.h	2;"	d
 draw_menu_scene	controllers\menu_scene.c	/^void draw_menu_scene(void)$/;"	f
 fin_menu_scene	controllers\menu_scene.c	/^void fin_menu_scene(void)$/;"	f
 init_menu_scene	controllers\menu_scene.c	/^void init_menu_scene(void)$/;"	f
+update_menu_scene	controllers\menu_scene.c	/^void update_menu_scene(void)$/;"	f
 __MENU_SCENE_H__	controllers\menu_scene.h	2;"	d
-APP_NAME	main.c	10;"	d	file:
-DEBUG	main.c	9;"	d	file:
-WINDOW_HEIGHT	main.c	12;"	d	file:
-WINDOW_POS_X	main.c	13;"	d	file:
-WINDOW_POS_Y	main.c	14;"	d	file:
-WINDOW_WIDTH	main.c	11;"	d	file:
+APP_NAME	main.c	8;"	d	file:
+WINDOW_HEIGHT	main.c	10;"	d	file:
+WINDOW_POS_X	main.c	11;"	d	file:
+WINDOW_POS_Y	main.c	12;"	d	file:
+WINDOW_WIDTH	main.c	9;"	d	file:
 init_window	main.c	/^void init_window()$/;"	f
 main	main.c	/^int main(int argc, char *argv[])$/;"	f
+advance_game_frame	managers\game.c	/^void advance_game_frame(void)$/;"	f
 init_game	managers\game.c	/^void init_game(void)$/;"	f
 s_frame	managers\game.c	/^static int s_frame = -180;  \/\/ ゲーム新港ためのフレームキー$/;"	v	file:
-update_game	managers\game.c	/^void update_game(void)$/;"	f
 CONFIG_SCENE	managers\game.h	/^  CONFIG_SCENE,$/;"	e	enum:__anon1
 GAME_SCENE	managers\game.h	/^  GAME_SCENE,$/;"	e	enum:__anon1
 MENU_SCENE	managers\game.h	/^  MENU_SCENE,$/;"	e	enum:__anon1
-Scene	managers\game.h	/^} Scene;$/;"	t	typeref:enum:__anon1
+Scene	managers\game.h	/^} Scene;  \/\/ ゲームのシーン$/;"	t	typeref:enum:__anon1
 __GAME_MANAGER_H__	managers\game.h	2;"	d
 g_current_scene	managers\game.h	/^Scene g_current_scene;  \/\/ カレントシーン$/;"	v
 create_window	tmp\views\window.c	/^int create_window(const char * window_title, int width, int height, int pos_x, int pos_y)$/;"	f
