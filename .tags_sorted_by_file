@@ -13,25 +13,37 @@ fin_menu_scene	controllers\menu_scene.c	/^void fin_menu_scene(void)$/;"	f
 init_menu_scene	controllers\menu_scene.c	/^void init_menu_scene(void)$/;"	f
 update_menu_scene	controllers\menu_scene.c	/^void update_menu_scene(void)$/;"	f
 __MENU_SCENE_H__	controllers\menu_scene.h	2;"	d
-APP_NAME	main.c	8;"	d	file:
-WINDOW_HEIGHT	main.c	10;"	d	file:
-WINDOW_POS_X	main.c	11;"	d	file:
-WINDOW_POS_Y	main.c	12;"	d	file:
-WINDOW_WIDTH	main.c	9;"	d	file:
 init_window	main.c	/^void init_window()$/;"	f
 main	main.c	/^int main(int argc, char *argv[])$/;"	f
 advance_game_frame	managers\game.c	/^void advance_game_frame(void)$/;"	f
 init_game	managers\game.c	/^void init_game(void)$/;"	f
-s_frame	managers\game.c	/^static int s_frame = -180;  \/\/ ゲーム新港ためのフレームキー$/;"	v	file:
-CONFIG_SCENE	managers\game.h	/^  CONFIG_SCENE,$/;"	e	enum:__anon1
-GAME_SCENE	managers\game.h	/^  GAME_SCENE,$/;"	e	enum:__anon1
-MENU_SCENE	managers\game.h	/^  MENU_SCENE,$/;"	e	enum:__anon1
-Scene	managers\game.h	/^} Scene;  \/\/ ゲームのシーン$/;"	t	typeref:enum:__anon1
-__GAME_MANAGER_H__	managers\game.h	2;"	d
+s_frame	managers\game.c	/^static int s_frame = 0;  \/\/ ゲーム進行ためのフレームキー$/;"	v	file:
+APP_TITLE	managers\game.h	9;"	d
+CONFIG_SCENE	managers\game.h	/^  CONFIG_SCENE,$/;"	e	enum:_Scene
+GAME_SCENE	managers\game.h	/^  GAME_SCENE,$/;"	e	enum:_Scene
+LOG	managers\game.h	16;"	d
+LOG	managers\game.h	18;"	d
+MENU_SCENE	managers\game.h	/^  MENU_SCENE,$/;"	e	enum:_Scene
+Scene	managers\game.h	/^} Scene;  \/\/ ゲームのシーン$/;"	t	typeref:enum:_Scene
+WINDOW_HEIGHT	managers\game.h	11;"	d
+WINDOW_POS_X	managers\game.h	12;"	d
+WINDOW_POS_Y	managers\game.h	13;"	d
+WINDOW_WIDTH	managers\game.h	10;"	d
+_Scene	managers\game.h	/^typedef enum _Scene {$/;"	g
+__GAME_H__	managers\game.h	2;"	d
 g_current_scene	managers\game.h	/^Scene g_current_scene;  \/\/ カレントシーン$/;"	v
-create_window	tmp\views\window.c	/^int create_window(const char * window_title, int width, int height, int pos_x, int pos_y)$/;"	f
-__WINDOW_H__	tmp\views\window.h	2;"	d
-g_should_close_flag	tmp\views\window.h	/^bool g_should_close_flag;   \/\/ ウィンドウを閉じる必要があるかどうか$/;"	v
+check_key_state	managers\keyboard.c	/^KeyState check_key_state(unsigned char keycode)$/;"	f
+s_keys	managers\keyboard.c	/^static int s_keys[256];$/;"	v	file:
+update_keyboard	managers\keyboard.c	/^void update_keyboard(KeyState key_state, unsigned char keycode, int x, int y)$/;"	f
+KEY_NORMAL	managers\keyboard.h	/^  KEY_NORMAL = 0,  \/\/ 通常状態
+KEY_UP	managers\keyboard.h	/^  KEY_UP     = 2,  \/\/ キーを離した$/;"	e	enum:_KeyState
+KeyState	managers\keyboard.h	/^} KeyState;$/;"	t	typeref:enum:_KeyState
+_KeyState	managers\keyboard.h	/^typedef enum _KeyState {$/;"	g
+__KEYBOARD_H__	managers\keyboard.h	2;"	d
+GLUT_KEY_A	models\keycode.h	7;"	d
+GLUT_KEY_ESC	models\keycode.h	6;"	d
+__KEYCODE_H__	models\keycode.h	2;"	d
+convert_char_code	models\string_util.c	/^void convert_char_code(const char* tocode, const char* fromcode, const char* src_str,$/;"	f
 !_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
 !_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
 !_TAG_PROGRAM_VERSION	5.8J2	//
@@ -39,5 +51,6 @@ g_should_close_flag	tmp\views\window.h	/^bool g_should_close_flag;   \/\/ ウィ
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_JP_AUTHOR	HIGASHI Hirohito	/Twitter: @h_east/
 !_TAG_FILE_ENCODING	cp932	//
+$/;"	e	enum:_KeyState
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_JP_URL	http://hp.vector.co.jp/authors/VA025040/	//

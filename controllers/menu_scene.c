@@ -14,7 +14,7 @@ extern Scene g_current_scene;
  */
 void init_menu_scene(void)
 {
-  glClearColor(0.0f, 0.0f, 0.0f, 0.0);
+  set_background_color(0.0f, 0.0f, 0.0f, 0.0);
 }
 
 /**
@@ -25,6 +25,9 @@ void update_menu_scene(void)
   if (check_key_state(GLUT_KEY_A) == KEY_DOWN) {
     LOG("'a' が押されました");
   }
+  else if (check_key_state(GLUT_KEY_ENTER) == KEY_DOWN) {
+    g_current_scene = GAME_SCENE;
+  }
 }
 
 /**
@@ -32,8 +35,8 @@ void update_menu_scene(void)
  */
 void draw_menu_scene(void)
 {
-  glColor3f(1.0f, 0.0f, 0.0f);
-  drawString(-0.25f, 0.0f, GLUT_BITMAP_HELVETICA_18, "<-- Game Start -->");
+  set_draw_string_color(1.0f, 0.0f, 0.0f);
+  draw_string(-0.25f, 0.0f, "<-- Menu Scene -->");
 }
 
 /**

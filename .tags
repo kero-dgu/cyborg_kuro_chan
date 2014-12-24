@@ -7,22 +7,34 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8J2	//
-APP_NAME	.\main.c	8;"	d	file:
-CONFIG_SCENE	.\managers\game.h	/^  CONFIG_SCENE,$/;"	e	enum:__anon1
-GAME_SCENE	.\managers\game.h	/^  GAME_SCENE,$/;"	e	enum:__anon1
-MENU_SCENE	.\managers\game.h	/^  MENU_SCENE,$/;"	e	enum:__anon1
-Scene	.\managers\game.h	/^} Scene;  \/\/ ゲームのシーン$/;"	t	typeref:enum:__anon1
-WINDOW_HEIGHT	.\main.c	10;"	d	file:
-WINDOW_POS_X	.\main.c	11;"	d	file:
-WINDOW_POS_Y	.\main.c	12;"	d	file:
-WINDOW_WIDTH	.\main.c	9;"	d	file:
+$/;"	e	enum:_KeyState
+APP_TITLE	.\managers\game.h	9;"	d
+CONFIG_SCENE	.\managers\game.h	/^  CONFIG_SCENE,$/;"	e	enum:_Scene
+GAME_SCENE	.\managers\game.h	/^  GAME_SCENE,$/;"	e	enum:_Scene
+GLUT_KEY_A	.\models\keycode.h	7;"	d
+GLUT_KEY_ESC	.\models\keycode.h	6;"	d
+KEY_NORMAL	.\managers\keyboard.h	/^  KEY_NORMAL = 0,  \/\/ 通常状態
+KEY_UP	.\managers\keyboard.h	/^  KEY_UP     = 2,  \/\/ キーを離した$/;"	e	enum:_KeyState
+KeyState	.\managers\keyboard.h	/^} KeyState;$/;"	t	typeref:enum:_KeyState
+LOG	.\managers\game.h	16;"	d
+LOG	.\managers\game.h	18;"	d
+MENU_SCENE	.\managers\game.h	/^  MENU_SCENE,$/;"	e	enum:_Scene
+Scene	.\managers\game.h	/^} Scene;  \/\/ ゲームのシーン$/;"	t	typeref:enum:_Scene
+WINDOW_HEIGHT	.\managers\game.h	11;"	d
+WINDOW_POS_X	.\managers\game.h	12;"	d
+WINDOW_POS_Y	.\managers\game.h	13;"	d
+WINDOW_WIDTH	.\managers\game.h	10;"	d
+_KeyState	.\managers\keyboard.h	/^typedef enum _KeyState {$/;"	g
+_Scene	.\managers\game.h	/^typedef enum _Scene {$/;"	g
 __CONFIG_SCENE_H__	.\controllers\config_scene.h	2;"	d
-__GAME_MANAGER_H__	.\managers\game.h	2;"	d
+__GAME_H__	.\managers\game.h	2;"	d
 __GAME_SCENE_H__	.\controllers\game_scene.h	2;"	d
+__KEYBOARD_H__	.\managers\keyboard.h	2;"	d
+__KEYCODE_H__	.\models\keycode.h	2;"	d
 __MENU_SCENE_H__	.\controllers\menu_scene.h	2;"	d
-__WINDOW_H__	.\tmp\views\window.h	2;"	d
 advance_game_frame	.\managers\game.c	/^void advance_game_frame(void)$/;"	f
-create_window	.\tmp\views\window.c	/^int create_window(const char * window_title, int width, int height, int pos_x, int pos_y)$/;"	f
+check_key_state	.\managers\keyboard.c	/^KeyState check_key_state(unsigned char keycode)$/;"	f
+convert_char_code	.\models\string_util.c	/^void convert_char_code(const char* tocode, const char* fromcode, const char* src_str,$/;"	f
 draw_config_scene	.\controllers\config_scene.c	/^void draw_config_scene(void)$/;"	f
 draw_game_scene	.\controllers\game_scene.c	/^void draw_game_scene(void)$/;"	f
 draw_menu_scene	.\controllers\menu_scene.c	/^void draw_menu_scene(void)$/;"	f
@@ -30,14 +42,15 @@ fin_config_scene	.\controllers\config_scene.c	/^void fin_config_scene(void)$/;"	
 fin_game_scene	.\controllers\game_scene.c	/^void fin_game_scene(void)$/;"	f
 fin_menu_scene	.\controllers\menu_scene.c	/^void fin_menu_scene(void)$/;"	f
 g_current_scene	.\managers\game.h	/^Scene g_current_scene;  \/\/ カレントシーン$/;"	v
-g_should_close_flag	.\tmp\views\window.h	/^bool g_should_close_flag;   \/\/ ウィンドウを閉じる必要があるかどうか$/;"	v
 init_config_scene	.\controllers\config_scene.c	/^void init_config_scene(void)$/;"	f
 init_game	.\managers\game.c	/^void init_game(void)$/;"	f
 init_game_scene	.\controllers\game_scene.c	/^void init_game_scene(void)$/;"	f
 init_menu_scene	.\controllers\menu_scene.c	/^void init_menu_scene(void)$/;"	f
 init_window	.\main.c	/^void init_window()$/;"	f
 main	.\main.c	/^int main(int argc, char *argv[])$/;"	f
-s_frame	.\managers\game.c	/^static int s_frame = -180;  \/\/ ゲーム新港ためのフレームキー$/;"	v	file:
+s_frame	.\managers\game.c	/^static int s_frame = 0;  \/\/ ゲーム進行ためのフレームキー$/;"	v	file:
+s_keys	.\managers\keyboard.c	/^static int s_keys[256];$/;"	v	file:
 update_config_scene	.\controllers\config_scene.c	/^void update_config_scene(void)$/;"	f
 update_game_scene	.\controllers\game_scene.c	/^void update_game_scene(void)$/;"	f
+update_keyboard	.\managers\keyboard.c	/^void update_keyboard(KeyState key_state, unsigned char keycode, int x, int y)$/;"	f
 update_menu_scene	.\controllers\menu_scene.c	/^void update_menu_scene(void)$/;"	f

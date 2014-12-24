@@ -1,37 +1,50 @@
-# OpenGL - freeglut をコンパイル
+# 参考：http://gmaj7sus4.hatenablog.com/entry/2013/12/18/165224
 
-CC		= gcc
+TARGET		= CyborgKuroChan
+INCLUDES	= -I./include
+LDLIBS		= -lfreeglut  -lglu32 -lopengl32 -liconv
+NOMAKEDIR	= .git% data% doc% src/bin%
+OBJDIR		= objs
+
+GCC		= gcc
 # -MMD を使うことで #include しているヘッダファイルの依存関係を解決してくれる
-CFLAGS	= -O2 -MMD -Wall
-LDLIBS	= -lfreeglut  -lglu32 -lopengl32
-SUBDIR	= controllers managers views
-OBJDIR	= obj
-SRCS	:=
-REL		:= controllers/
-include $(REL)Makefile
-REL		:= managers/
-include $(REL)Makefile
-SRCS += main.c
+# -DDEBUG は完成前に消す
+CFLAGS	= -O2 -MMD -MP -Wall -DDEBUG
+CS		= $(shell find * -name "*.c")
+SRCS	= $(filter-out $(NOMAKEDIR), $(CS))
+DIRS	= $(dir $(SRCS))
+BINDIRS	= $(addprefix $(OBJDIR)/, $(DIRS))
 
-TARGET	= CyborgKuroChan
-OBJS	= $(SRCS:.c=.o)
-DEPS	= $(SRCS:.c=.d)
-TILDE	= $(SRCS:.c=.c~)
+# patsubst は空白で区切られたものか指定の文字列に置換
+OBJS	= $(addprefix $(OBJDIR)/, $(patsubst %.c, %.o, $(SRCS)))
+DEPS	= $(OBJS:.o=.d)
+TILS	= $(patsubst %.c, %.c~, $(SRCS))
 
+ifeq "$(strip $(OBJDIR))" ""
+	OBJDIR = .
+endif
 
-# サフィックス .c のファイルに対しては下記の生成コマンドを使って, サフィックス .o ファイルを生成する
-.c.o:
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $^ $(LDLIBS)
+ifeq "$(strip $(DIRS))" ""
+	OBJDIR = .
+endif
 
 .PYTHON: default
 default:
-	$(OBJS) $(TARGET)
+	@[ -d  $(OBJDIR)   ] || mkdir -p $(OBJDIR)
+	@[ -d "$(BINDIRS)" ] || mkdir -p $(BINDIRS)
+	@make all --no-print-directory
+
+.PYTHON: all
+all: $(OBJS) $(TARGET)
+
+$(TARGET): $(OBJS) $(LIBS)
+	$(GCC) -o $@ $^ $(LDLIBS)
+
+$(OBJDIR)/%.o: %.c
+	$(GCC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 .PYTHON: clean
 clean:
-	$(RM) $(OBJS) $(DEPS) $(TILDE) $(TARGET)
+	@rm -rf $(TARGET) $(TILS) $(OBJDIR)
 
 -include $(DEPS)

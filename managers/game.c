@@ -10,7 +10,8 @@
 
 
 // Static variables **************************************************
-static int s_frame = -180;  // ゲーム新港ためのフレームキー
+static int s_frame  = 0;  // ゲーム進行ためのフレームキー
+static float s_fps  = 0;  // FPS
 
 
 // Game functions **************************************************
@@ -20,14 +21,13 @@ static int s_frame = -180;  // ゲーム新港ためのフレームキー
 void init_game(void)
 {
   g_current_scene = MENU_SCENE;
-
   init_menu_scene();
   init_game_scene();
   init_config_scene();
-  glutDisplayFunc(draw_event);      // 画面を更新する内容
+  glutDisplayFunc(draw_event);            // 画面を更新する内容
   glutKeyboardFunc(keyboard_down_event);  // キーボードを押した時
   glutKeyboardUpFunc(keyboard_up_event);  // キーボードを離した時
-  glutReshapeFunc(reshape_event);   // ウィンドウサイズ変更(※ウィンドウのサイズを変更できなくする)
+  glutReshapeFunc(reshape_event);         // ウィンドウサイズ変更(※ウィンドウのサイズを変更できなくする)
 }
 
 /**
@@ -35,16 +35,14 @@ void init_game(void)
  */
 void advance_game_frame(void)
 {
-  static GLuint s_past_gl_time = 0;   // 前回画面が更新された時の時刻を記録
-  GLuint now_gl_tike = 0;             // 今回関数実行時の時刻を記憶
-
-  // TODO: 以下の処理を見直し
-  now_gl_tike = glutGet(GLUT_ELAPSED_TIME);   // glutInit() 後の経過時間をミリ秒で取得
-  if (now_gl_tike - 16 > s_past_gl_time) {    // 60fps を上回る状態を維持するため、16ミリ秒ごとにアニメーションを新港させ画面を更新する
-    ++s_frame;                    // フレーム番号を進める
+  static int s_prev_time = 0;   // 前回画面が更新された時の時刻を記録
+  int current_time = glutGet(GLUT_ELAPSED_TIME);  // glutInit() 後の経過時間をミリ秒で取得
+  // 15ミリ秒ごとにアニメーションを進行させて画面を更新
+  if (current_time - 15 > s_prev_time) {
+    ++s_frame;                    // フレームを更新
     update_game();                // ゲームの更新処理
     glutPostRedisplay();          // 画面更新の実行
-    s_past_gl_time = now_gl_tike; // 画面更新時間を更新
+    s_prev_time = current_time;   // 画面更新時間を更新
   }
 }
 
@@ -53,7 +51,8 @@ void advance_game_frame(void)
  */
 void update_game(void)
 {
-  // TODO: 数値の変更など
+  measurement_fps(&s_fps);  // FPS を計測
+
   switch (g_current_scene) {
     // TODO: 起動画面の追加
     case MENU_SCENE:    update_menu_scene();    break;
@@ -84,11 +83,27 @@ void fin_game(void)
 void play_game(void)
 {
   init_game();
-  glutIdleFunc(advance_game_frame);  // 画面を更新
+  glutIdleFunc(advance_game_frame);   // 画面を更新
   // TODO: 必要？
-  glutGet(GLUT_ELAPSED_TIME);
-  // TODO: ゲームの終了処理
-  glutMainLoop();             // ループ開始
+  // glutGet(GLUT_ELAPSED_TIME);
+  glutMainLoop();                     // ループ開始
+}
+
+/**
+ * FPS を計測(update_game() 内で実行)
+ * @param  fps   FPS をセットする
+ */
+void measurement_fps(float *fps)
+{
+  static int s_prev_time  = 0;  // 前回の FPS 計測時間
+  int current_time    = glutGet(GLUT_ELAPSED_TIME);
+  int elapsed_time    = current_time - s_prev_time;   // 前回の FPS 計測からの経過時間
+
+  if (elapsed_time > 1000) {
+    *fps = (s_frame*1000.0f)/elapsed_time;
+    s_prev_time = current_time;   // FPS 計測時間を更新
+    s_frame     = 0;              // フレームをクリア
+  }
 }
 
 
@@ -102,9 +117,17 @@ void draw_event(void)
   switch (g_current_scene) {
     // TODO: 起動画面の追加
     case MENU_SCENE:    draw_menu_scene();    break;
-    case GAME_SCENE:    draw_game_scene();   break;
+    case GAME_SCENE:    draw_game_scene();    break;
     case CONFIG_SCENE:  draw_config_scene();  break;
   }
+
+  // debug
+  // FPS を表示
+  char fps_str[16];
+  sprintf(fps_str, "FPS:%.2f", s_fps);
+  draw_string(-0.9f, 0.9f, fps_str);
+  //////////////////////////////////////////////////
+
   glutSwapBuffers();                      // 実行されていない OpenGL の処理を強制的に実行
 }
 
@@ -133,9 +156,38 @@ void reshape_event(int width, int height)
 }
 
 
-// Freeglut wrappers **************************************************
-void drawString(float x, float y, void* font, const char* string)
+// GLUT wrappers **************************************************
+/**
+ * glColor3f を描画する文字色を16進数で設定
+ * @param   color_code    カラーコード
+ */
+void set_draw_string_color(float red, float green, float blue)
 {
+  // TODO: hex で指定したい
+  glColor3f(red, green, blue);
+}
+
+/**
+ * glClearColor をラップして背景色を16進数で設定
+ * @param   color_code    カラーコード
+ */
+void set_background_color(float red, float green, float blue, float alpha)
+{
+  // TODO: hex で指定したい
+  glClearColor(red, green, blue, alpha);
+}
+
+
+// Freeglut wrappers **************************************************
+/**
+ * 文字列を描画
+ * @param x      中心座標から X 座標にどれだけずらすか
+ * @param y      中心座標から Y 座標にどれだけずらすか
+ * @param string 表示したい文字列
+ */
+void draw_string(float x, float y, const char *string)
+{
+  void* font = GLUT_BITMAP_HELVETICA_18;
   glRasterPos2f(x, y);
-  glutBitmapString(font, (const unsigned char*)string);
+  glutBitmapString(font, (const unsigned char *)string);
 }
