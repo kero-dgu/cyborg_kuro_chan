@@ -2,15 +2,18 @@
 #define __GAME_H__
 
 
+#include <GL/freeglut.h>
 #include <stdio.h>
 
 
 // Macros **************************************************
+// Game configs
 #define APP_TITLE       "サイボーグクロちゃん"
 #define WINDOW_WIDTH    640
 #define WINDOW_HEIGHT   480
 #define WINDOW_POS_X    200
 #define WINDOW_POS_Y    200
+
 // debug
 #ifdef DEBUG
 #define LOG(...) { printf("%s %s(%d): ", __TIME__ , __func__, __LINE__); printf(__VA_ARGS__); printf("\n"); }
@@ -40,14 +43,20 @@ void play_game(void);           // ゲーム開始
 void measurement_fps(float *);  // FPS を計測
 
 // GLUT callbacks
-void draw_event(void);                                      // 描画処理のコールバック
-void keyboard_down_event(unsigned char key, int x, int y);  // キーが押された時ののコールバック
-void keyboard_up_event(unsigned char key, int x, int y);    // キーが話された時のコールバック
-void reshape_event(int, int);                               // ウィンドウサイズ変更のコールバック
+void draw_event(void);                             // 描画処理のコールバック
+void keyboard_down_event(unsigned char, int, int); // キーが押された時ののコールバック
+void keyboard_up_event(unsigned char, int, int);   // キーが話された時のコールバック
+void reshape_event(int, int);                      // ウィンドウサイズ変更のコールバック
 
 // GLUT wrappers
-void set_draw_string_color(float, float, float);        // 描画する文字色
-void set_background_color(float, float, float, float);  // 背景色を設定
+// TODO: 図形の描画
+void draw_rect(int, int, int, int);               // 四角形の描画
+void draw_triangle(int, int, int, int, int, int); // 三角形の描画
+// TODO: png 画像の描画
+void draw_graphics(int, int, int, int);           // 画像の描画
+void draw_rect(int, int, int, int);               // 四角形を描画
+void set_draw_string_color(const char *);         // 描画する文字色
+void set_background_color(const char *, float);   // 背景色を設定
 
 // Freeglut wrappers
 void draw_string(float, float, const char * string);   // 文字列描画

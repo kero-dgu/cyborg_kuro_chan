@@ -1,12 +1,12 @@
-#include <GL/freeglut.h>
-#include <stdarg.h>
-#include <stdlib.h>
-
 #include "game.h"
 #include "keyboard.h"
 #include "../controllers/menu_scene.h"
 #include "../controllers/game_scene.h"
 #include "../controllers/config_scene.h"
+#include "../models/string_util.h"
+#include <GL/freeglut.h>
+#include <stdarg.h>
+#include <stdlib.h>
 
 
 // Static variables **************************************************
@@ -21,6 +21,10 @@ static float s_fps  = 0;  // FPS
 void init_game(void)
 {
   g_current_scene = MENU_SCENE;
+#ifdef DEBUG
+  // デバッグモードならゲームシーンから始める
+  g_current_scene = GAME_SCENE;
+#endif
   init_menu_scene();
   init_game_scene();
   init_config_scene();
@@ -65,6 +69,8 @@ void update_game(void)
     fin_game();
     exit(0);
   }
+
+  reset_key_state();  // キー状態をリセット
 }
 
 /**
@@ -125,26 +131,27 @@ void draw_event(void)
   // FPS を表示
   char fps_str[16];
   sprintf(fps_str, "FPS:%.2f", s_fps);
+
   draw_string(-0.9f, 0.9f, fps_str);
   //////////////////////////////////////////////////
 
-  glutSwapBuffers();                      // 実行されていない OpenGL の処理を強制的に実行
+  glutSwapBuffers();                // 実行されていない OpenGL の処理を強制的に実行
 }
 
 /**
  * キーボードを押した時のコールバック
  */
-void keyboard_down_event(unsigned char key, int x, int y)
+void keyboard_down_event(unsigned char key, int pos_x, int pos_y)
 {
-  update_keyboard(KEY_DOWN, key, x, y);
+  update_keyboard(KEY_DOWN, key, pos_x, pos_y);
 }
 
 /**
  * キーボードを離した時のコールバック
  */
-void keyboard_up_event(unsigned char key, int x, int y)
+void keyboard_up_event(unsigned char key, int pos_x, int pos_y)
 {
-  update_keyboard(KEY_UP, key, x, y);
+  update_keyboard(KEY_UP, key, pos_x, pos_y);
 }
 
 /**
@@ -158,22 +165,42 @@ void reshape_event(int width, int height)
 
 // GLUT wrappers **************************************************
 /**
+ * 四角形を描画
+ * @param   x
+ * @param   y
+ * @param   width
+ * @param   height
+ */
+void draw_rect(int x, int y, int width, int height)
+{
+  glBegin(GL_QUADS);
+  glVertex2d(-0.7, 0.5);
+  glVertex2d(-0.7, 0.7);
+  glVertex2d(-0.5, 0.7);
+  glVertex2d(-0.5, 0.5);
+  glEnd();
+}
+
+/**
  * glColor3f を描画する文字色を16進数で設定
  * @param   color_code    カラーコード
  */
-void set_draw_string_color(float red, float green, float blue)
+void set_draw_string_color(const char *color_code)
 {
-  // TODO: hex で指定したい
+  float red, green, blue;
+  convert_string_to_hex(color_code, &red, &green, &blue);
   glColor3f(red, green, blue);
 }
 
 /**
  * glClearColor をラップして背景色を16進数で設定
  * @param   color_code    カラーコード
+ * @param   alpha         透明度
  */
-void set_background_color(float red, float green, float blue, float alpha)
+void set_background_color(const char *color_code, float alpha)
 {
-  // TODO: hex で指定したい
+  float red, green, blue;
+  convert_string_to_hex(color_code, &red, &green, &blue);
   glClearColor(red, green, blue, alpha);
 }
 

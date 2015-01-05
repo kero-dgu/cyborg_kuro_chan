@@ -2,7 +2,8 @@
 
 TARGET		= CyborgKuroChan
 INCLUDES	= -I./include
-LDLIBS		= -lfreeglut  -lglu32 -lopengl32 -liconv
+# glpng は glut を使用しているので最初に設置
+LDLIBS		= -lglpng -lfreeglut  -lglu32 -lopengl32 -liconv
 NOMAKEDIR	= .git% data% doc% src/bin%
 OBJDIR		= objs
 

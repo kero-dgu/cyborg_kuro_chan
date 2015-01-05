@@ -1,10 +1,10 @@
-#include <GL/glut.h>
+#include <GL/freeglut.h>
 #include "managers/game.h"
 #include "models/string_util.h"
 
 
 // Prototype declaration **************************************************
-static void init_window(void);   // ウィンドウの初期化
+void init_window(void);   // ウィンドウの初期化
 
 
 // Main **************************************************
@@ -16,14 +16,12 @@ int main(int argc, char *argv[])
 #else
   strcpy(app_title, APP_TITLE);
 #endif
-
   glutInit(&argc, argv);
   init_window();
   glutCreateWindow(app_title);
   play_game();
   return 0;
 }
-
 
 /**
  * ウィンドウの初期化

@@ -8,7 +8,7 @@
  */
 void init_game_scene(void)
 {
-  set_background_color(0.0f, 0.0f, 0.0f, 0.0);
+  set_background_color("#000000", 1.0f);
 }
 
 /**
@@ -16,9 +16,6 @@ void init_game_scene(void)
  */
 void update_game_scene(void)
 {
-  if (check_key_state(GLUT_KEY_ENTER) == KEY_DOWN) {
-    g_current_scene = MENU_SCENE;
-  }
 }
 
 /**
@@ -26,8 +23,8 @@ void update_game_scene(void)
  */
 void draw_game_scene(void)
 {
-  set_draw_string_color(1.0f, 0.0f, 0.0f);
-  draw_string(-0.25f, 0.0f, "<-- Game Scene -->");
+  set_draw_string_color("#0000ff");
+  draw_rect(100, 100, 300, 200);
 }
 
 /**

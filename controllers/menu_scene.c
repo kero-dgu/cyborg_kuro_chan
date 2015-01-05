@@ -14,7 +14,7 @@ extern Scene g_current_scene;
  */
 void init_menu_scene(void)
 {
-  set_background_color(0.0f, 0.0f, 0.0f, 0.0);
+  set_background_color("#000000", 1.0f);
 }
 
 /**
@@ -22,10 +22,10 @@ void init_menu_scene(void)
  */
 void update_menu_scene(void)
 {
-  if (check_key_state(GLUT_KEY_A) == KEY_DOWN) {
-    LOG("'a' が押されました");
+  if (check_key_state(GLUT_KEY_A) == KEY_PRESSING) {
+    LOG("'a' が押され続けています");
   }
-  else if (check_key_state(GLUT_KEY_ENTER) == KEY_DOWN) {
+  else if (check_key_state(GLUT_KEY_ENTER) == KEY_UP) {
     g_current_scene = GAME_SCENE;
   }
 }
@@ -35,7 +35,7 @@ void update_menu_scene(void)
  */
 void draw_menu_scene(void)
 {
-  set_draw_string_color(1.0f, 0.0f, 0.0f);
+  set_draw_string_color("#ff0000");
   draw_string(-0.25f, 0.0f, "<-- Menu Scene -->");
 }
 

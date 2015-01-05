@@ -1,5 +1,7 @@
 #include "string_util.h"
+#include "math_util.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <iconv.h>
 
@@ -30,11 +32,34 @@ void convert_char_code(const char* tocode, const char* fromcode, const char* src
   iconv_close(icd);
 }
 
-
-float convert_string_to_hex(const char *color_code, float *red, float *green, float *blue)
+/**
+ * カラーコードを16進数の文字列で指定して, red, green, blue の変数にそれぞれの値を格納
+ * @param color_code 16進数のからコード
+ * @param red        赤度を格納する変数
+ * @param green      緑度を格納する変数
+ * @param blue       青度を格納する変数
+ */
+void convert_string_to_hex(const char *color_code, float *red, float *green, float *blue)
 {
   char shape_symbol[4] = {0};
+  char red_hex_str[8] = {0}, green_hex_str[8] = {0}, blue_hex_str[8] = {0};
+  char *endptr;
+  int head = 0;
+
+  // TODO: 文字数をチェックして6文字ならそのまま, 3文字なら前の文字を続けるようにする
 
   strncpy(shape_symbol, color_code, 1);
-  if (str)
+  if (strcmp(shape_symbol, "#") == 0) { head += 1; }
+
+  strcpy(red_hex_str,   "0x");
+  strcpy(green_hex_str, "0x");
+  strcpy(blue_hex_str,  "0x");
+
+  strncpy(red_hex_str   + 2, color_code + head,     2);
+  strncpy(green_hex_str + 2, color_code + head + 2, 2);
+  strncpy(blue_hex_str  + 2, color_code + head + 4, 2);
+
+  *red   = round_float((float)strtol(red_hex_str,   &endptr, 16)/255.0f, 1);
+  *green = round_float((float)strtol(green_hex_str, &endptr, 16)/255.0f, 1);
+  *blue  = round_float((float)strtol(blue_hex_str,  &endptr, 16)/255.0f, 1);
 }
