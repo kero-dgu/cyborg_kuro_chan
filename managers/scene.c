@@ -27,8 +27,8 @@ void init_scene(void)
  */
 void update_scene(void)
 {
-  // 次のシーンが設定されているならシーンの切り替え
-  if (g_next_scene != NONE_SCENE) {
+  // のシーンが設定されているならシーンの切り替え
+  if (g_next_scene != NONE_SCENE && g_next_scene != s_current_scene) {
     fin_scene();    // カレントシーンの終了
     s_current_scene = g_next_scene; // カレントシーンの切り替え
     init_scene();   // カレントシーンの初期化
