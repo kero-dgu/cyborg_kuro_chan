@@ -1,6 +1,7 @@
 #include "game_scene.h"
 #include "../managers/game.h"
 #include "../managers/keyboard.h"
+#include "../managers/scene.h"
 
 
 /**
@@ -16,6 +17,10 @@ void init_game_scene(void)
  */
 void update_game_scene(void)
 {
+  if (check_key_state(GLUT_KEY_ENTER) == KEY_UP) {
+    g_next_scene = MENU_SCENE;
+    LOG("メニューシーンに遷移");
+  }
 }
 
 /**

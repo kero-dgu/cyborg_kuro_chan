@@ -1,63 +1,93 @@
-!_TAG_FILE_ENCODING	cp932	//
 !_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
 !_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
 !_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
-!_TAG_PROGRAM_JP_AUTHOR	HIGASHI Hirohito	/Twitter: @h_east/
-!_TAG_PROGRAM_JP_URL	http://hp.vector.co.jp/authors/VA025040/	//
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
-!_TAG_PROGRAM_VERSION	5.8J2	//
-$/;"	e	enum:_KeyState
-APP_TITLE	.\managers\game.h	11;"	d
-CONFIG_SCENE	.\managers\game.h	/^  CONFIG_SCENE,$/;"	e	enum:_Scene
-GAME_SCENE	.\managers\game.h	/^  GAME_SCENE,$/;"	e	enum:_Scene
-GLUT_KEY_A	.\models\keycode.h	8;"	d
-GLUT_KEY_ENTER	.\models\keycode.h	6;"	d
-GLUT_KEY_ESC	.\models\keycode.h	7;"	d
-KEY_NORMAL	.\managers\keyboard.h	/^  KEY_NORMAL   = 0,  \/\/ 通常状態
-KEY_NUM	.\managers\keyboard.c	6;"	d	file:
-KEY_PRESSING	.\managers\keyboard.h	/^  KEY_PRESSING = 2,  \/\/ キーを押している$/;"	e	enum:_KeyState
-KEY_UP	.\managers\keyboard.h	/^  KEY_UP       = 3,  \/\/ キーを離した$/;"	e	enum:_KeyState
-KeyState	.\managers\keyboard.h	/^} KeyState;$/;"	t	typeref:enum:_KeyState
-LOG	.\managers\game.h	19;"	d
-LOG	.\managers\game.h	21;"	d
-MENU_SCENE	.\managers\game.h	/^  MENU_SCENE,$/;"	e	enum:_Scene
-Scene	.\managers\game.h	/^} Scene;  \/\/ ゲームのシーン$/;"	t	typeref:enum:_Scene
-WINDOW_HEIGHT	.\managers\game.h	13;"	d
-WINDOW_POS_X	.\managers\game.h	14;"	d
-WINDOW_POS_Y	.\managers\game.h	15;"	d
-WINDOW_WIDTH	.\managers\game.h	12;"	d
-_KeyState	.\managers\keyboard.h	/^typedef enum _KeyState {$/;"	g
-_Scene	.\managers\game.h	/^typedef enum _Scene {$/;"	g
-__CONFIG_SCENE_H__	.\controllers\config_scene.h	2;"	d
-__GAME_H__	.\managers\game.h	2;"	d
-__GAME_SCENE_H__	.\controllers\game_scene.h	2;"	d
-__KEYBOARD_H__	.\managers\keyboard.h	2;"	d
-__KEYCODE_H__	.\models\keycode.h	2;"	d
-__MATH_UTIL_H__	.\models\math_util.h	2;"	d
-__MENU_SCENE_H__	.\controllers\menu_scene.h	2;"	d
-advance_game_frame	.\managers\game.c	/^void advance_game_frame(void)$/;"	f
-convert_char_code	.\models\string_util.c	/^void convert_char_code(const char* tocode, const char* fromcode, const char* src_str,$/;"	f
-convert_string_to_hex	.\models\string_util.c	/^void convert_string_to_hex(const char *color_code, float *red, float *green, float *blue)$/;"	f
-draw_config_scene	.\controllers\config_scene.c	/^void draw_config_scene(void)$/;"	f
-draw_game_scene	.\controllers\game_scene.c	/^void draw_game_scene(void)$/;"	f
-fin_config_scene	.\controllers\config_scene.c	/^void fin_config_scene(void)$/;"	f
-fin_game	.\managers\game.c	/^void fin_game(void)$/;"	f
-fin_game_scene	.\controllers\game_scene.c	/^void fin_game_scene(void)$/;"	f
-g_current_scene	.\managers\game.h	/^Scene g_current_scene;  \/\/ カレントシーン$/;"	v
-init_config_scene	.\controllers\config_scene.c	/^void init_config_scene(void)$/;"	f
-init_game	.\managers\game.c	/^void init_game(void)$/;"	f
-init_game_scene	.\controllers\game_scene.c	/^void init_game_scene(void)$/;"	f
-init_menu_scene	.\controllers\menu_scene.c	/^void init_menu_scene(void)$/;"	f
-init_window	.\main.c	/^void init_window()$/;"	f
-main	.\main.c	/^int main(int argc, char *argv[])$/;"	f
-play_game	.\managers\game.c	/^void play_game(void)$/;"	f
-round_float	.\models\math_util.c	/^float round_float(float f_num, int precision)$/;"	f
-s_fps	.\managers\game.c	/^static float s_fps  = 0;  \/\/ FPS$/;"	v	file:
-s_frame	.\managers\game.c	/^static int s_frame  = 0;  \/\/ ゲーム進行ためのフレームキー$/;"	v	file:
-s_keys	.\managers\keyboard.c	/^static int s_keys[KEY_NUM] = { '\\0' };$/;"	v	file:
-update_config_scene	.\controllers\config_scene.c	/^void update_config_scene(void)$/;"	f
-update_game	.\managers\game.c	/^void update_game(void)$/;"	f
-update_game_scene	.\controllers\game_scene.c	/^void update_game_scene(void)$/;"	f
-update_keyboard	.\managers\keyboard.c	/^void update_keyboard(KeyState key_state, unsigned char keycode, int x, int y)$/;"	f
-update_menu_scene	.\controllers\menu_scene.c	/^void update_menu_scene(void)$/;"	f
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+APP_TITLE	managers/game.h	11;"	d
+BINDIRS	Makefile	/^BINDIRS	= $(addprefix $(OBJDIR)\/, $(DIRS))$/;"	m
+CFLAGS	Makefile	/^CFLAGS	= -O2 -MMD -MP -Wall -DDEBUG$/;"	m
+CONFIG_SCENE	managers/game.h	/^  CONFIG_SCENE,$/;"	e	enum:_Scene
+CS	Makefile	/^CS			= $(shell find * -name "*.c")$/;"	m
+DEPS	Makefile	/^DEPS	= $(OBJS:.o=.d)$/;"	m
+DIRS	Makefile	/^DIRS		= $(dir $(SRCS))$/;"	m
+GAME_SCENE	managers/game.h	/^  GAME_SCENE,$/;"	e	enum:_Scene
+GCC	Makefile	/^GCC			= gcc$/;"	m
+GLUT_KEY_A	models/keycode.h	8;"	d
+GLUT_KEY_ENTER	models/keycode.h	6;"	d
+GLUT_KEY_ESC	models/keycode.h	7;"	d
+INCLUDES	Makefile	/^INCLUDES	= -I.\/include$/;"	m
+KEY_DOWN	managers/keyboard.h	/^  KEY_DOWN     = 1,  \/\/ キーを押した$/;"	e	enum:_KeyState
+KEY_NORMAL	managers/keyboard.h	/^  KEY_NORMAL   = 0,  \/\/ 通常状態$/;"	e	enum:_KeyState
+KEY_NUM	managers/keyboard.c	6;"	d	file:
+KEY_PRESSING	managers/keyboard.h	/^  KEY_PRESSING = 2,  \/\/ キーを押している$/;"	e	enum:_KeyState
+KEY_UP	managers/keyboard.h	/^  KEY_UP       = 3,  \/\/ キーを離した$/;"	e	enum:_KeyState
+KeyState	managers/keyboard.h	/^} KeyState;$/;"	t	typeref:enum:_KeyState
+LDLIBS	Makefile	/^	LDLIBS  = -lfreeglut  -lglu32 -lopengl32 -liconv$/;"	m
+LDLIBS	Makefile	/^	LDLIBS  = -lglut -lGLU -lGL -liconv -lm$/;"	m
+LOG	managers/game.h	24;"	d
+LOG	managers/game.h	26;"	d
+MENU_SCENE	managers/game.h	/^  MENU_SCENE,$/;"	e	enum:_Scene
+NOMAKEDIR	Makefile	/^NOMAKEDIR	= .git% data% doc% src\/bin%$/;"	m
+OBJDIR	Makefile	/^	OBJDIR = .$/;"	m
+OBJDIR	Makefile	/^OBJDIR		= objs$/;"	m
+OBJS	Makefile	/^OBJS	= $(addprefix $(OBJDIR)\/, $(patsubst %.c, %.o, $(SRCS)))$/;"	m
+SRCS	Makefile	/^SRCS		= $(filter-out $(NOMAKEDIR), $(CS))$/;"	m
+Scene	managers/game.h	/^} Scene;  \/\/ ゲームのシーン$/;"	t	typeref:enum:_Scene
+TARGET	Makefile	/^TARGET		= CyborgKuroChan$/;"	m
+TILS	Makefile	/^TILS	= $(patsubst %.c, %.c~, $(SRCS))$/;"	m
+WINDOW_HEIGHT	managers/game.h	14;"	d
+WINDOW_HEIGHT	managers/game.h	17;"	d
+WINDOW_POS_X	managers/game.h	19;"	d
+WINDOW_POS_Y	managers/game.h	20;"	d
+WINDOW_WIDTH	managers/game.h	13;"	d
+WINDOW_WIDTH	managers/game.h	16;"	d
+_KeyState	managers/keyboard.h	/^typedef enum _KeyState {$/;"	g
+_Scene	managers/game.h	/^typedef enum _Scene {$/;"	g
+__CONFIG_SCENE_H__	controllers/config_scene.h	2;"	d
+__GAME_H__	managers/game.h	2;"	d
+__GAME_SCENE_H__	controllers/game_scene.h	2;"	d
+__KEYBOARD_H__	managers/keyboard.h	2;"	d
+__KEYCODE_H__	models/keycode.h	2;"	d
+__MATH_UTIL_H__	models/math_util.h	2;"	d
+__MENU_SCENE_H__	controllers/menu_scene.h	2;"	d
+__STRING_UTIL_H__	models/string_util.h	2;"	d
+advance_game_frame	managers/game.c	/^void advance_game_frame(void)$/;"	f
+check_key_state	managers/keyboard.c	/^KeyState check_key_state(unsigned char keycode)$/;"	f
+check_key_state_wait_frame	managers/keyboard.c	/^KeyState check_key_state_wait_frame(unsigned char keycode, int wait_frame)$/;"	f
+convert_char_code	models/string_util.c	/^void convert_char_code(const char* tocode, const char* fromcode, const char* src_str,$/;"	f
+convert_string_to_hex	models/string_util.c	/^void convert_string_to_hex(const char *color_code, float *red, float *green, float *blue)$/;"	f
+draw_config_scene	controllers/config_scene.c	/^void draw_config_scene(void)$/;"	f
+draw_event	managers/game.c	/^void draw_event(void)$/;"	f
+draw_game_scene	controllers/game_scene.c	/^void draw_game_scene(void)$/;"	f
+draw_menu_scene	controllers/menu_scene.c	/^void draw_menu_scene(void)$/;"	f
+draw_rect	managers/game.c	/^void draw_rect(int x, int y, int width, int height)$/;"	f
+draw_string	managers/game.c	/^void draw_string(float x, float y, const char *string)$/;"	f
+fin_config_scene	controllers/config_scene.c	/^void fin_config_scene(void)$/;"	f
+fin_game	managers/game.c	/^void fin_game(void)$/;"	f
+fin_game_scene	controllers/game_scene.c	/^void fin_game_scene(void)$/;"	f
+fin_menu_scene	controllers/menu_scene.c	/^void fin_menu_scene(void)$/;"	f
+g_current_scene	managers/game.h	/^Scene g_current_scene;  \/\/ カレントシーン$/;"	v
+init_config_scene	controllers/config_scene.c	/^void init_config_scene(void)$/;"	f
+init_game	managers/game.c	/^void init_game(void)$/;"	f
+init_game_scene	controllers/game_scene.c	/^void init_game_scene(void)$/;"	f
+init_menu_scene	controllers/menu_scene.c	/^void init_menu_scene(void)$/;"	f
+init_window	main.c	/^void init_window()$/;"	f
+keyboard_down_event	managers/game.c	/^void keyboard_down_event(unsigned char key, int pos_x, int pos_y)$/;"	f
+keyboard_up_event	managers/game.c	/^void keyboard_up_event(unsigned char key, int pos_x, int pos_y)$/;"	f
+main	main.c	/^int main(int argc, char *argv[])$/;"	f
+measurement_fps	managers/game.c	/^void measurement_fps(float *fps)$/;"	f
+play_game	managers/game.c	/^void play_game(void)$/;"	f
+reset_key_state	managers/keyboard.c	/^void reset_key_state(void)$/;"	f
+reshape_event	managers/game.c	/^void reshape_event(int width, int height)$/;"	f
+round_float	models/math_util.c	/^float round_float(float f_num, int precision)$/;"	f
+s_fps	managers/game.c	/^static float s_fps  = 0;  \/\/ FPS$/;"	v	file:
+s_frame	managers/game.c	/^static int s_frame  = 0;  \/\/ ゲーム進行ためのフレームキー$/;"	v	file:
+s_keys	managers/keyboard.c	/^static int s_keys[KEY_NUM] = { '\\0' };$/;"	v	file:
+set_background_color	managers/game.c	/^void set_background_color(const char *color_code, float alpha)$/;"	f
+set_draw_string_color	managers/game.c	/^void set_draw_string_color(const char *color_code)$/;"	f
+update_config_scene	controllers/config_scene.c	/^void update_config_scene(void)$/;"	f
+update_game	managers/game.c	/^void update_game(void)$/;"	f
+update_game_scene	controllers/game_scene.c	/^void update_game_scene(void)$/;"	f
+update_keyboard	managers/keyboard.c	/^void update_keyboard(KeyState key_state, unsigned char keycode, int x, int y)$/;"	f
+update_menu_scene	controllers/menu_scene.c	/^void update_menu_scene(void)$/;"	f

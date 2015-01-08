@@ -1,5 +1,6 @@
 #include "game.h"
 #include "keyboard.h"
+#include "scene.h"
 #include "../controllers/menu_scene.h"
 #include "../controllers/game_scene.h"
 #include "../controllers/config_scene.h"
@@ -9,9 +10,13 @@
 #include <stdlib.h>
 
 
+// Global variables **************************************************
+extern Scene g_next_scene;
+
+
 // Static variables **************************************************
-static int s_frame  = 0;  // ゲーム進行ためのフレームキー
-static float s_fps  = 0;  // FPS
+static int s_frame  = 0;        // ゲーム進行ためのフレームキー
+static float s_fps  = 0;        // FPS
 
 
 // Game functions **************************************************
@@ -20,19 +25,15 @@ static float s_fps  = 0;  // FPS
  */
 void init_game(void)
 {
-  g_current_scene = MENU_SCENE;
-#ifdef DEBUG
-  // デバッグモードならゲームシーンから始める
-  g_current_scene = GAME_SCENE;
-#endif
-  init_menu_scene();
-  init_game_scene();
-  init_config_scene();
   glutDisplayFunc(draw_event);            // 画面を更新する内容
   glutKeyboardFunc(keyboard_down_event);  // キーボードを押した時
   glutKeyboardUpFunc(keyboard_up_event);  // キーボードを離した時
   glutReshapeFunc(reshape_event);         // ウィンドウサイズ変更(※ウィンドウのサイズを変更できなくする)
+
+  g_next_scene = NONE_SCENE;
+  init_scene();
 }
+
 
 /**
  * ゲーム画面を更新するための処理
@@ -57,16 +58,10 @@ void update_game(void)
 {
   measurement_fps(&s_fps);  // FPS を計測
 
-  switch (g_current_scene) {
-    // TODO: 起動画面の追加
-    case MENU_SCENE:    update_menu_scene();    break;
-    case GAME_SCENE:    update_game_scene();    break;
-    case CONFIG_SCENE:  update_config_scene();  break;
-  }
+  update_scene();   // シーンの更新
 
   if (check_key_state(GLUT_KEY_ESC) == KEY_UP) {
     LOG("Ended game");
-    fin_game();
     exit(0);
   }
 
@@ -78,9 +73,7 @@ void update_game(void)
  */
 void fin_game(void)
 {
-  fin_menu_scene();
-  fin_game_scene();
-  fin_config_scene();
+  fin_scene();
 }
 
 /**
@@ -120,12 +113,6 @@ void measurement_fps(float *fps)
 void draw_event(void)
 {
   glClear(GL_COLOR_BUFFER_BIT);     // glClearColor の色を反映させる
-  switch (g_current_scene) {
-    // TODO: 起動画面の追加
-    case MENU_SCENE:    draw_menu_scene();    break;
-    case GAME_SCENE:    draw_game_scene();    break;
-    case CONFIG_SCENE:  draw_config_scene();  break;
-  }
 
   // debug
   // FPS を表示
@@ -134,6 +121,8 @@ void draw_event(void)
 
   draw_string(-0.9f, 0.9f, fps_str);
   //////////////////////////////////////////////////
+
+  draw_scene();
 
   glutSwapBuffers();                // 実行されていない OpenGL の処理を強制的に実行
 }

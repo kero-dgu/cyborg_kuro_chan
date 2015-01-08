@@ -1,4 +1,5 @@
 #include <GL/freeglut.h>
+#include <string.h>
 #include "managers/game.h"
 #include "models/string_util.h"
 
